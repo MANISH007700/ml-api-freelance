@@ -1,0 +1,8 @@
+flask==3.0.0
+transformers==4.34.0
+loguru==0.7.2
+torch==2.1.0+cpu
+torchvision==0.16.0+cpu
+torchaudio==2.1.0+cpu
+sentencepiece==0.1.99
+protobuf==4.24.4
