@@ -38,7 +38,7 @@ def paraphrase_text(model, tokenizer, device, input_text, num_return_sequences=1
 model, tokenizer, device_hardware = load_model()
 logger.info("Flask app initialized!")
 
-@app.route("/paraphrase", methods=["POST"])
+@app.route("/paraphrase/", methods=["POST"])
 def paraphrase_api():
     logger.info(f"Input Form --> {request.form}")
     if 'text' in request.form:
