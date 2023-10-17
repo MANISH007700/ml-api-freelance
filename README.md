@@ -16,12 +16,22 @@
 
 
 ## Running the flask app
+```EXPORT FLASK_APP=app.py```
 ```flask run```
 
 ## Api endpoints
+### Health Check
+
+    Endpoint: http://127.0.0.1:5000/healthz
+    Method: GET
+    Description: Use this endpoint to check the health of the application.
+
+Example api call:
+![Alt text](images-readme/image-healthcheck.png)
+
 ### Paraphrasing endpoint
 
-    Endpoint: http://127.0.0.1:5000/api/v1/paraphrase/
+    Endpoint: http://127.0.0.1:5000/paraphrase
     Method: POST
     Description: Use this endpoint to send text data for paraphrasing.
 
@@ -43,11 +53,27 @@ Response
 }
 ```
 
-### Health Check
+### Grammar correction endpoint
 
-    Endpoint: http://127.0.0.1:5000/healthz/
-    Method: GET
-    Description: Use this endpoint to check the health of the application.
+    Endpoint: http://127.0.0.1:5000/correct-grammar
+    Method: POST
+    Description: Use this endpoint to send text data for grammar correction.
 
 Example api call:
-![Alt text](images-readme/image-healthcheck.png)
+![Alt text](images-readme/image-grammar-correction.png)
+
+Response
+1. For successfull prediction (Text passed in formdata)
+``` bash
+{
+    "corrected_text": "You are going to the party, right?",
+    "status": 200
+}
+```
+2. If text not passed in formdata:
+```bash
+{
+    "error_message": "No text in form_data",
+    "status": 400
+}
+```
