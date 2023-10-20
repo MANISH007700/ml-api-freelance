@@ -10,11 +10,11 @@ app = Flask(__name__)
 
 
 app.config["paraphrase_model"], app.config["paraphrase_tokenizer"], device_hardware = load_model(model_name="Vamsi/T5_Paraphrase_Paws")
-app.config["grammar_model"], app.config["grammar_tokenizer"], _ = load_model(model_name="pszemraj/flan-t5-large-grammar-synthesis")
+app.config["grammar_model"], app.config["grammar_tokenizer"], _ = load_model(model_name="vennify/t5-base-grammar-correction")
 
 logger.info("Flask app initialized!")
 
-@app.route("/paraphrase/", methods=["POST"])
+@app.route("/paraphrase", methods=["POST"])
 @check_text_field(app)
 def paraphrase_api():
     text = request.form["text"]
@@ -33,7 +33,7 @@ def paraphrase_api():
     return jsonify(response_data)
 
 
-@app.route("/correct-grammar/", methods=["POST"])
+@app.route("/correct-grammar", methods=["POST"])
 @check_text_field(app)
 def correct_grammar_api():
     text = request.form["text"]

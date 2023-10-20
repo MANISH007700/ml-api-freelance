@@ -45,19 +45,19 @@ def paraphrase_text(model, tokenizer, device, input_text, num_return_sequences=1
     return paraphrashed_text
 
 def correct_grammar(model, tokenizer, device, input_text, num_return_sequences=1):
-    text =  input_text
+    text =  input_text + '.'
 
-    encoding = tokenizer.encode_plus(text, padding="max_length", max_length=256, return_tensors="pt")
+    encoding = tokenizer.encode_plus(text, return_tensors="pt")
     input_ids, attention_masks = encoding["input_ids"].to(device), encoding["attention_mask"].to(device)
-
     outputs = model.generate(
         input_ids=input_ids, 
         attention_mask=attention_masks,
-        max_new_tokens=256,
+        max_new_tokens=torch.sum(attention_masks == 1).item()+5,
+        num_beams = 5,
         num_return_sequences=num_return_sequences
     )
 
-    corrected_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    corrected_text = tokenizer.decode(outputs[0], skip_special_tokens=True, clean_up_tokenization_spaces=True)
     return corrected_text
 
 def load_model(model_name):

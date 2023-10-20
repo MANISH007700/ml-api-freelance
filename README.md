@@ -16,7 +16,6 @@
 
 
 ## Running the flask app
-```EXPORT FLASK_APP=app.py```
 ```flask run```
 
 ## Api endpoints
